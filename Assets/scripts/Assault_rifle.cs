@@ -21,7 +21,7 @@ public class Assault_rifle : Gun_attributes,IGun_interface
     }
     private void OnEnable()
     {
-        gunMovement.setValues(moveToDefSpeed);
+        gunMovement.setValues(moveToDefSpeed,defRot);
         gunMovement.AdjustPosRotForGun_OnSwitch(defPos, defRot);
         canShoot = true;
     }
@@ -38,7 +38,7 @@ public class Assault_rifle : Gun_attributes,IGun_interface
 
     void Update()
     {
-       
+        ADS();
         Shoot();
         ReloadCheck();
         
@@ -96,7 +96,17 @@ public class Assault_rifle : Gun_attributes,IGun_interface
             
     }
 
-    
+    public void ADS()
+    {
+        if(Input.GetMouseButtonDown(1))
+        {
+            gunMovement.AdjustPosRotForADS(ADSPos, ADSRot);
+        }
+        if(Input.GetMouseButtonUp(1))
+        {
+            gunMovement.AdjustPosRotForADS(defPos, defRot);
+        }
+    }
 
     public IEnumerator onReload() 
     {

@@ -19,11 +19,11 @@ public class Camera_script : MonoBehaviour
         }
     }
 
-     public RaycastHit Point()
-    {
-        RaycastHit hit;
-        Vector3 look = transform.TransformDirection(Vector3.forward);
-        Physics.Raycast(transform.position, look, out hit);
-        return hit;
-    }
+    // public RaycastHit Point()
+    //{
+    //    RaycastHit hit;
+    //    Vector3 look = transform.TransformDirection(Vector3.forward);
+    //    Physics.Raycast(transform.position, look, out hit);
+    //    return hit;
+    //}
 }

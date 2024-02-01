@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
-    private Camera_script cam;
+   
     [SerializeField] private GameObject bulletHole; 
     static public Bullet instance;
     [SerializeField] private ParticleSystem bloodEffect;
@@ -24,7 +24,7 @@ public class Bullet : MonoBehaviour
 
     void Start()
     {
-        cam = FindAnyObjectByType<Camera_script>();
+        
         instance = this;
        // enemy = FindAnyObjectByType<Enemy>();
         recoil = FindAnyObjectByType<Gun_attributes>();
@@ -82,7 +82,8 @@ public class Bullet : MonoBehaviour
         }
         if(collision.gameObject.layer  == 10 || collision.gameObject.layer == 6)
         {
-            Instantiate(bulletHole, collision.contacts[0].point +( collision.contacts[0].normal*.05f), Quaternion.FromToRotation(Vector3.up, collision.contacts[0].normal));
+          var newEffect =   Instantiate(bulletHole, collision.contacts[0].point +( collision.contacts[0].normal*.05f), Quaternion.FromToRotation(Vector3.up, collision.contacts[0].normal));
+            newEffect.transform.parent = collision.gameObject.transform;
         }
        StartCoroutine(DestroyBullet(0));
         

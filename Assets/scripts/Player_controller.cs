@@ -59,7 +59,10 @@ public class Player_controller : MonoBehaviour
         FallDown();
         Crouch();
         AdjustMaxSpeed();
-        
+        if(Input.GetKey(KeyCode.Escape))
+        {
+            Application.Quit();
+        }
 
     }
 
@@ -98,10 +101,7 @@ public class Player_controller : MonoBehaviour
         }
          
     }
-    private void ADS()
-    {
-       
-    }
+   
     private void AdjustMaxSpeed()
     {
         if(!isRunning && !isCrouched)

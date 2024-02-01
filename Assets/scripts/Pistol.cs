@@ -26,7 +26,7 @@ public class Pistol : Gun_attributes, IGun_interface
     {
         canShoot = true;
         gunMovement.AdjustPosRotForGun_OnSwitch(defPos, defRot);
-        gunMovement.setValues(moveToDefSpeed);
+        gunMovement.setValues(moveToDefSpeed,defRot);
     }
     void Start()
     {
@@ -42,9 +42,10 @@ public class Pistol : Gun_attributes, IGun_interface
    
     void Update()
     {
+
         Shoot();
         ReloadCheck();
-      
+        ADS();
 
 
         if (!isReloading)
@@ -90,7 +91,17 @@ public class Pistol : Gun_attributes, IGun_interface
         }
 
     }
-   
+    public void ADS()
+    {
+        if (Input.GetMouseButtonDown(1))
+        {
+            gunMovement.AdjustPosRotForADS(ADSPos, ADSRot);
+        }
+        if (Input.GetMouseButtonUp(1))
+        {
+            gunMovement.AdjustPosRotForADS(defPos, defRot);
+        }
+    }
     public void ReloadCheck()
     {
         if (bulletInMag <=0)
