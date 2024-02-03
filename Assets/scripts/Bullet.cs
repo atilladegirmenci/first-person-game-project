@@ -4,14 +4,15 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
-   
+    [SerializeField] private float DefBulletLife;
     [SerializeField] private GameObject bulletHole; 
     static public Bullet instance;
     [SerializeField] private ParticleSystem bloodEffect;
     [SerializeField] private float bulletSpeed;
     [SerializeField] public float bulletDamage;
     private Gun_attributes recoil;
-    private Enemy enemy;
+
+    
     private float recoilX;
     private float recoilY;
     
@@ -35,7 +36,7 @@ public class Bullet : MonoBehaviour
         
         rb = gameObject.GetComponent<Rigidbody>();
         BulletTravel();
-        StartCoroutine(DestroyBullet(5));
+        StartCoroutine(DestroyBullet(DefBulletLife));
     }
 
     
@@ -89,7 +90,7 @@ public class Bullet : MonoBehaviour
         
     }
 
-    private IEnumerator DestroyBullet(int delay)
+    private IEnumerator DestroyBullet(float delay)
     {
         yield return new WaitForSeconds(delay);
         Destroy(gameObject);
