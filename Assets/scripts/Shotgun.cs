@@ -8,7 +8,7 @@ public class Shotgun : Gun_attributes, IGun_interface
     private Gun_attributes gunAttributes;
     private Gun_movement gunMovement;
     private sound_manager soundManager;
-    private Player_controller playerController;
+   
 
     static public Shotgun instance;
     [SerializeField] int bulletNumber;
@@ -28,7 +28,7 @@ public class Shotgun : Gun_attributes, IGun_interface
     void Start()
     {
         instance = this;
-        playerController = Object.FindAnyObjectByType<Player_controller>();
+       
         canShoot = true;
         bulletInMag = magSize;
 
@@ -65,18 +65,24 @@ public class Shotgun : Gun_attributes, IGun_interface
 
     public IEnumerator onReload()
     {
-        for(int i = bulletInMag; i <= magSize;i++)
-
+        for(int i = bulletInMag +1; i <= magSize;i++)
         {
-            yield return new WaitForSeconds(reloadTime);
-            Debug.Log(i);
-            bulletInMag =i;
+          
+                if (Input.GetMouseButton(0) && bulletInMag > 0)
+                {
+                    break;
+                }
+                else
+                {
+                    yield return new WaitForSeconds(reloadTime);
+                    soundManager.PlayShotgunShellLoad();
+                   
+                    bulletInMag = i;
+                }
             
-
         }
 
-       
-        
+        StartCoroutine( soundManager.PlayShotgunClick(0.4f));
         canShoot = true;
         isReloading = false;
     }
@@ -132,7 +138,7 @@ public class Shotgun : Gun_attributes, IGun_interface
 
 
                 canShoot = false;
-                StartCoroutine(soundManager.PlayShotgunClick());
+                StartCoroutine(soundManager.PlayShotgunClick(0.4f));
                 StartCoroutine(RateOfFire());
             }
 

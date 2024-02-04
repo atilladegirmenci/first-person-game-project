@@ -6,7 +6,7 @@ using static UnityEngine.GraphicsBuffer;
 
 public class Gun_movement : MonoBehaviour
 {
-    [SerializeField] private GameObject crossHair;
+   // [SerializeField] private GameObject crossHair;
     public Camera playerCamera;
     private Vector3 tempPos;
     private Quaternion tempRot;
@@ -110,11 +110,11 @@ public class Gun_movement : MonoBehaviour
     {
 
         i++;
-        Debug.Log(i);
+        
         if(i%2==1) 
         {
             ADSIng = true;
-            crossHair.SetActive(true);
+           // crossHair.SetActive(true);
 
             tempPos = transform.localPosition;
             tempRot = transform.localRotation;
@@ -128,7 +128,7 @@ public class Gun_movement : MonoBehaviour
         else
         {
             ADSIng = false;
-            crossHair.SetActive(false);
+            
 
             defaultPos = tempPos;
             defaultRot = tempRot;

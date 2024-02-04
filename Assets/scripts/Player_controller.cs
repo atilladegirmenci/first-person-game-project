@@ -7,7 +7,7 @@ using UnityEngine.Tilemaps;
 
 public class Player_controller : MonoBehaviour
 {
-    private IGun_interface gun;
+  
     private Rigidbody rb;
     private CapsuleCollider playerCol;
     public Camera playerCamera;

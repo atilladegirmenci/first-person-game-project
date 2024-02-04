@@ -10,7 +10,7 @@ public class effects : MonoBehaviour
     {
         if(effectType == effectTypeEnum.muzzleFlash) { Destroy_(1); }
         else if (effectType == effectTypeEnum.blood) { Destroy_(5); }
-        else if (effectType == effectTypeEnum.bulletHole) { Destroy_(50); }
+        else if (effectType == effectTypeEnum.bulletHole) { Destroy_(30); }
        
     }
 

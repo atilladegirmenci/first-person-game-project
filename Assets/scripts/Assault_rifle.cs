@@ -9,7 +9,7 @@ public class Assault_rifle : Gun_attributes,IGun_interface
     private Gun_movement gunMovement;
     private sound_manager soundManager;
     private Gun_attributes gunAttributes;
-    private Player_controller playerController;
+   
 
     
     static public Assault_rifle instance;
@@ -29,7 +29,7 @@ public class Assault_rifle : Gun_attributes,IGun_interface
     {
 
         instance = this;
-        playerController = Object.FindAnyObjectByType<Player_controller>();
+      
         canShoot = true;
         bulletInMag = magSize;
        
@@ -110,6 +110,7 @@ public class Assault_rifle : Gun_attributes,IGun_interface
 
     public IEnumerator onReload() 
     {
+        soundManager.PlayARLoad();
         yield return new WaitForSeconds(reloadTime);
         bulletInMag = magSize;
         canShoot = true;

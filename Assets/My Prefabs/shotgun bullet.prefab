@@ -52,7 +52,7 @@ MonoBehaviour:
   bulletHole: {fileID: 8803468253873643353, guid: 29944581b6d8749479afc178c9fc5b17, type: 3}
   bloodEffect: {fileID: 9125336662690748202, guid: bd2bc99159a76044ca418a0e79d9938c, type: 3}
   bulletSpeed: 5
-  bulletDamage: 10
+  bulletDamage: 9
 --- !u!54 &1166457709325684135
 Rigidbody:
   m_ObjectHideFlags: 0

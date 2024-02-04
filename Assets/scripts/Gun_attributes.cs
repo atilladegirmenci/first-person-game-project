@@ -12,8 +12,8 @@ public class Gun_attributes : MonoBehaviour
     public TextMeshProUGUI magTextUI;
     public bool canShoot;
     public float rateOfFire;
-    [Range (0,20)]  public float recoilAmountX;
-    [Range (0,20)]  public float recoilAmountY;
+    [Range (0,25)]  public float recoilAmountX;
+    [Range (0,25)]  public float recoilAmountY;
     public float pushBackForce;
     public int magSize;
     protected int bulletInMag;

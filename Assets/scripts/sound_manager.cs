@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 public class sound_manager : MonoBehaviour
@@ -8,6 +9,10 @@ public class sound_manager : MonoBehaviour
     [SerializeField] private AudioSource ARSound;
     [SerializeField] private AudioSource shotgunClick;
     [SerializeField] private AudioSource shotgunShot;
+    [SerializeField] private AudioSource shotgunLoadShell;
+    [SerializeField] private AudioSource ARLoad;
+    [SerializeField] private AudioSource PistolLoad;
+
     static public sound_manager instance;
     void Start()
     {
@@ -15,7 +20,7 @@ public class sound_manager : MonoBehaviour
         
     }
 
-    // Update is called once per frame
+   
     void Update()
     {
         
@@ -32,9 +37,22 @@ public class sound_manager : MonoBehaviour
     {
         shotgunShot.Play();
     }
-    public IEnumerator PlayShotgunClick()
+    public IEnumerator PlayShotgunClick(float delay)
     {
-        yield return new WaitForSeconds(0.4f);
+        yield return new WaitForSeconds(delay);
         shotgunClick.Play();
+    }
+    public void PlayReloadPistol()
+    {
+        PistolLoad.Play();
+    }
+    public void PlayShotgunShellLoad()
+    {
+        shotgunLoadShell.Play();
+    }
+
+    public void PlayARLoad()
+    {
+        ARLoad.Play();
     }
 }
