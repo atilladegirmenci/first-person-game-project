@@ -16,8 +16,6 @@ public class Player_controller : MonoBehaviour
     static public Player_controller instance;
    
 
-      
-    
     [Header("BOX CAST")]
     [SerializeField] private float maxDistance;
     [SerializeField] private Vector3 boxSize;
@@ -31,7 +29,7 @@ public class Player_controller : MonoBehaviour
     [SerializeField] private bool isMoving;
     [SerializeField] public bool isCrouched;
     [SerializeField] private bool isRunning;
-    [SerializeField] private float currentSpeed;
+    [SerializeField] private float forceToMove;
     [SerializeField] private float walksSpeed;
     [SerializeField] private float runSpeed;
     [SerializeField] private float crouchSpeed;
@@ -41,7 +39,7 @@ public class Player_controller : MonoBehaviour
     
     void Start()
     {
-       
+      
         instance = this;
         Application.targetFrameRate = 120;
         rb = GetComponent<Rigidbody>();
@@ -59,6 +57,7 @@ public class Player_controller : MonoBehaviour
         FallDown();
         Crouch();
         AdjustMaxSpeed();
+
         if(Input.GetKey(KeyCode.Escape))
         {
             Application.Quit();
@@ -69,37 +68,37 @@ public class Player_controller : MonoBehaviour
     private void PlayerMovement()
     {
        
-
          Vector3 xzVelo = new Vector3(rb.velocity.x, 0, rb.velocity.z);
          Vector3 yVelo = new Vector3(0,rb.velocity.y, 0);
          xzVelo = Vector3.ClampMagnitude(xzVelo, maxSpeed);
          rb.velocity = xzVelo + yVelo;
 
-        if (rb.velocity.magnitude > 0)
-        { isMoving = true; }
-        else 
-        { isMoving = false; }
 
-        if (Input.GetKey(KeyCode.W))
-        {
-            rb.AddRelativeForce(Vector3.forward*currentSpeed);
-        }
+        if (rb.velocity.magnitude > 0) { isMoving = true; }
+        else { isMoving = false; }
 
-        if (Input.GetKey(KeyCode.S))
-        {
-            rb.AddRelativeForce(Vector3.back * currentSpeed);
-        }
+      
+        
+            if (Input.GetKey(KeyCode.W))
+            {
+                rb.AddRelativeForce(Vector3.forward * forceToMove);
+            }
 
-        if(Input.GetKey(KeyCode.D))
-        {
-            rb.AddRelativeForce(Vector3.right * currentSpeed);
-        }
+            if (Input.GetKey(KeyCode.S))
+            {
+                rb.AddRelativeForce(Vector3.back * forceToMove);
+            }
 
-        if (Input.GetKey(KeyCode.A))
-        {
-            rb.AddRelativeForce(Vector3.left * currentSpeed);
-        }
-         
+            if (Input.GetKey(KeyCode.D))
+            {
+                rb.AddRelativeForce(Vector3.right * forceToMove);
+            }
+
+            if (Input.GetKey(KeyCode.A))
+            {
+                rb.AddRelativeForce(Vector3.left * forceToMove);
+            }
+        
     }
    
     private void AdjustMaxSpeed()
@@ -113,6 +112,10 @@ public class Player_controller : MonoBehaviour
             maxSpeed = runSpeed;
         }
         else if(!isRunning && isCrouched) 
+        {
+            maxSpeed = crouchSpeed;
+        }
+        else if(isRunning && isCrouched)
         {
             maxSpeed = crouchSpeed;
         }
@@ -161,6 +164,7 @@ public class Player_controller : MonoBehaviour
 
         playerCamera.transform.localRotation = Quaternion.Euler(rotationX, 0, 0);
     }
+   
 
     private void FallDown()
     {

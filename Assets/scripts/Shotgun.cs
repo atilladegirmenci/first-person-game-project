@@ -31,7 +31,6 @@ public class Shotgun : Gun_attributes, IGun_interface
        
         canShoot = true;
         bulletInMag = magSize;
-
     }
 
 
@@ -123,9 +122,7 @@ public class Shotgun : Gun_attributes, IGun_interface
                 {
                     Instantiate(bullet, bulletSpwnPivot.transform.position, transform.rotation);
                     gunMovement.Recoil(recoilAmountX, recoilAmountY);
-                    
                 }
-               
 
                 gunMovement.PushBack(pushBackForce);
 
@@ -134,7 +131,6 @@ public class Shotgun : Gun_attributes, IGun_interface
                 
 
                 bulletInMag--;
-
 
 
                 canShoot = false;

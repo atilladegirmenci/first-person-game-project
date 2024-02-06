@@ -48,7 +48,7 @@ public class Enemy : MonoBehaviour
     private IEnumerator Die()
     {
         rb.freezeRotation = false;
-        yield return new WaitForSeconds(3);
+        yield return new WaitForSeconds(5);
         Destroy(gameObject);
     }
     public void GetDamage(float damage)

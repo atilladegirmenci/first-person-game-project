@@ -83,8 +83,9 @@ public class Bullet : MonoBehaviour
         }
         if(collision.gameObject.layer  == 10 || collision.gameObject.layer == 6)
         {
-          var newEffect =   Instantiate(bulletHole, collision.contacts[0].point +( collision.contacts[0].normal*.05f), Quaternion.FromToRotation(Vector3.up, collision.contacts[0].normal));
+            var newEffect =   Instantiate(bulletHole, collision.contacts[0].point +( collision.contacts[0].normal*.05f), Quaternion.FromToRotation(Vector3.up, collision.contacts[0].normal));
             newEffect.transform.parent = collision.gameObject.transform;
+          
         }
        StartCoroutine(DestroyBullet(0));
         

@@ -32,11 +32,10 @@ public class Gun_movement : MonoBehaviour
     {
         instance = this;
         ADSIng = false;
-       
         
     }
 
-    // Update is called once per frame
+    
     void Update()
     {
       
@@ -114,7 +113,8 @@ public class Gun_movement : MonoBehaviour
         if(i%2==1) 
         {
             ADSIng = true;
-           // crossHair.SetActive(true);
+            // crossHair.SetActive(true);
+            playerCamera.fieldOfView -= 10;
 
             tempPos = transform.localPosition;
             tempRot = transform.localRotation;
@@ -129,6 +129,7 @@ public class Gun_movement : MonoBehaviour
         {
             ADSIng = false;
             
+            playerCamera.fieldOfView += 10;
 
             defaultPos = tempPos;
             defaultRot = tempRot;
@@ -143,14 +144,11 @@ public class Gun_movement : MonoBehaviour
     public IEnumerator moveToDefault()
     {
         
-        
             if (transform.localRotation != defaultRot && !isMouseMoving())
             {
 
                 yield return new WaitForSeconds(0.1f);
                 transform.localRotation = Quaternion.RotateTowards(transform.localRotation, defaultRot, rotateToDefSpeed * Time.deltaTime);
-
-
 
             }
             if (transform.localPosition != defaultPos)
@@ -158,7 +156,6 @@ public class Gun_movement : MonoBehaviour
 
                 transform.localPosition = Vector3.MoveTowards(transform.localPosition, defaultPos, moveToDefSpeed * Time.deltaTime);
             }
-        
         
     }
 
@@ -168,7 +165,5 @@ public class Gun_movement : MonoBehaviour
         { return true; }
         else { return false; }
 
-
-       
     }
 }

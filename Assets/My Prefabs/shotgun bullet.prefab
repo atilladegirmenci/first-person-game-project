@@ -48,7 +48,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1094c5d9c834e29489559113775dd105, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DefBulletLife: 0.5
+  DefBulletLife: 0.4
   bulletHole: {fileID: 8803468253873643353, guid: 29944581b6d8749479afc178c9fc5b17, type: 3}
   bloodEffect: {fileID: 9125336662690748202, guid: bd2bc99159a76044ca418a0e79d9938c, type: 3}
   bulletSpeed: 5

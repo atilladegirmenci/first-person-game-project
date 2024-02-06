@@ -13,7 +13,8 @@ public class Pistol : Gun_attributes, IGun_interface
     private Gun_movement gunMovement;
     private sound_manager soundManager;
    
-    
+
+
 
     static public Pistol instance;
 
