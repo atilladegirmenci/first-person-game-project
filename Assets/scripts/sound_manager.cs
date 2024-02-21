@@ -17,13 +17,16 @@ public class sound_manager : MonoBehaviour
     void Start()
     {
         instance = this;
-        
+        Cursor.visible = false;
     }
 
    
     void Update()
     {
-        
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            Cursor.visible = true;
+        }
     }
     public void PlayPistolSound()
     {

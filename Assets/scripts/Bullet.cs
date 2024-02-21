@@ -18,21 +18,15 @@ public class Bullet : MonoBehaviour
     
 
     private Rigidbody rb;
-    
-    
-    
   
-
     void Start()
     {
         
         instance = this;
-       // enemy = FindAnyObjectByType<Enemy>();
         recoil = FindAnyObjectByType<Gun_attributes>();
         recoilY = recoil.recoilAmountY;
         recoilX = recoil.recoilAmountX;
         
-      
         
         rb = gameObject.GetComponent<Rigidbody>();
         BulletTravel();
@@ -59,27 +53,33 @@ public class Bullet : MonoBehaviour
          rb.AddForce(ray.direction.normalized * bulletSpeed , ForceMode.Impulse);
        
 
-       
     }
 
 
     private void OnCollisionEnter(Collision collision)
     {
-
+        IEnemy enemy = collision.gameObject.GetComponent<IEnemy>();
         if (collision.contacts[0].otherCollider.transform.gameObject.tag == "enemy head")
         {
-           // Instantiate(bloodEffect, collision.contacts[0].point, Quaternion.identity);
-            collision.gameObject.GetComponent<Enemy>().GetDamage(bulletDamage *5);
+           // collision.gameObject.GetComponent<Enemy>().GetDamage(bulletDamage *5);
 
+            if(enemy != null)
+            {
+                enemy.GetHeadDamage(bulletDamage);
+            }
             
-            Debug.Log("HEAD SHOT");
+           // Debug.Log("HEAD SHOT");
         }
         else if (collision.contacts[0].otherCollider.transform.gameObject.tag == "enemy body")
         {
-            //Instantiate(bloodEffect, collision.contacts[0].point, Quaternion.identity);
-            collision.gameObject.GetComponent<Enemy>().GetDamage(bulletDamage);
+            //collision.gameObject.GetComponent<Enemy>().GetDamage(bulletDamage);
 
-            Debug.Log("BODY SHOT");
+            if (enemy != null)
+            {
+                enemy.GetBodyDamage(bulletDamage);
+            }
+
+           // Debug.Log("BODY SHOT");
         }
         if(collision.gameObject.layer  == 10 || collision.gameObject.layer == 6)
         {
@@ -87,8 +87,7 @@ public class Bullet : MonoBehaviour
             newEffect.transform.parent = collision.gameObject.transform;
           
         }
-       StartCoroutine(DestroyBullet(0));
-        
+        StartCoroutine(DestroyBullet(0));
     }
 
     private IEnumerator DestroyBullet(float delay)

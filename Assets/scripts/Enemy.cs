@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.UIElements;
 
-public class Enemy : MonoBehaviour
+public class Enemy : MonoBehaviour , IEnemy
 {
     Rigidbody rb;
     private float maxHealth;
@@ -45,14 +45,29 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    private IEnumerator Die()
+    public IEnumerator Die()
     {
         rb.freezeRotation = false;
         yield return new WaitForSeconds(5);
         Destroy(gameObject);
     }
-    public void GetDamage(float damage)
+
+    
+    //public void GetDamage(float damage)
+    //{
+    //    health -= damage;
+    //}
+
+
+    public void GetHeadDamage(float damage)
+    {
+        health -= damage * 4;
+    }
+
+    public void GetBodyDamage(float damage)
     {
         health -= damage;
     }
+
+   
 }
