@@ -1157,8 +1157,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b5ceab807c50095498a4575f52d60ad4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyType: 0
+  enemyType1: 0
+  enemyType2: 1
   explosiveEnemy: {fileID: 3795750178402208989, guid: 084da1deee8b5aa40ad31f2dfc54c9f6, type: 3}
+  fastEnenmy: {fileID: 1889319198775406246, guid: f6390a89127311f4f93efd55aff0143e, type: 3}
 --- !u!4 &281167267 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3507529684465261469, guid: c5c251c4f6ea3694285b311cea75f2a2, type: 3}

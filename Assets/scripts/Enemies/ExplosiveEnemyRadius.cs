@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class CheckForRadius : MonoBehaviour
+public class ExplosiveEnemyRadius : MonoBehaviour
 {
      private Player_health player;
     
