@@ -20,7 +20,6 @@ public class HeadBobSystem : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
        CheckForHeadBob();
        StopHeadBob();
     }

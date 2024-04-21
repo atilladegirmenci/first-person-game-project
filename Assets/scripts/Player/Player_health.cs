@@ -11,22 +11,25 @@ public class Player_health : MonoBehaviour
     [SerializeField] private float playerHealth;
     [SerializeField] private TextMeshProUGUI hp;
     [SerializeField] private GameObject gothitEffect;
+
+    static public Player_health instance;  
     void Start()
     {
-        
+        instance = this;
     }
 
     
     void Update()
     {
         hp.text = $"HP: {playerHealth}";
+
         if (playerHealth <= 0)
         {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            MySceneManager.instance.OpenDeathScene(); 
         }
         if (gothitEffect.GetComponent<Image>().color.a > 0)
         {
-            var color = gothitEffect.GetComponent<Image>().color;
+            Color color = gothitEffect.GetComponent<Image>().color;
             color.a -= 0.01f;
             gothitEffect.GetComponent<Image>().color = color;
         }
@@ -34,7 +37,7 @@ public class Player_health : MonoBehaviour
 
     public void TakeDamage(float damage)
     {
-        var color = gothitEffect.GetComponent<Image>().color;
+        Color color = gothitEffect.GetComponent<Image>().color;
         color.a = 0.6f;
         gothitEffect.GetComponent<Image>().color = color;
         playerHealth -= damage;

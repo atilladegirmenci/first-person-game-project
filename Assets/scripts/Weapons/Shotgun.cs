@@ -5,18 +5,16 @@ using TMPro;
 
 public class Shotgun : Gun_attributes, IGun_interface
 {
-    private Gun_attributes gunAttributes;
+    
     private Gun_movement gunMovement;
-    private sound_manager soundManager;
-   
-
     static public Shotgun instance;
+
+
     [SerializeField] int bulletNumber;
 
     private void Awake()
     {
         gunMovement = Object.FindObjectOfType<Gun_movement>();
-        soundManager = Object.FindAnyObjectByType<sound_manager>();
     }
 
     private void OnEnable()
@@ -29,7 +27,6 @@ public class Shotgun : Gun_attributes, IGun_interface
     {
         instance = this;
        
-        canShoot = true;
         bulletInMag = magSize;
     }
 
@@ -37,15 +34,18 @@ public class Shotgun : Gun_attributes, IGun_interface
     void Update()
     {
         ADS();
-        Shoot();
-        ReloadCheck();
+        if (Input.GetMouseButtonDown(0)) { Shoot(); }
+        if (Input.GetKeyDown(KeyCode.R)) { ReloadCheck(); }
+        
 
         if (!isReloading)
         {
             magTextUI.text = bulletInMag.ToString() + "/" + magSize.ToString();
+
         }
         else
         {
+            
             magTextUI.text = "RELOADING " + bulletInMag.ToString() + "/" + magSize.ToString();
         }
     }
@@ -66,30 +66,25 @@ public class Shotgun : Gun_attributes, IGun_interface
     {
         for(int i = bulletInMag +1; i <= magSize;i++)
         {
-          
-                if (Input.GetMouseButton(0) && bulletInMag > 0)
-                {
-                    break;
-                }
-                else
-                {
-                    yield return new WaitForSeconds(reloadTime);
-                    soundManager.PlayShotgunShellLoad();
-                   
-                    bulletInMag = i;
-                }
+
+            //if (Input.GetMouseButton(0) && bulletInMag > 0 && bulletInMag < magSize)
+            //{
+            //    break;
+            //}
+            //else
             
+           yield return new WaitForSeconds(reloadTime);
+
+           sound_manager.instance.PlayShotgunShellLoad();
+
+           bulletInMag = i;
+            
+                        
         }
 
-        StartCoroutine( soundManager.PlayShotgunClick(0.4f));
+        StartCoroutine(sound_manager.instance.PlayShotgunClick(0.4f));
         canShoot = true;
         isReloading = false;
-    }
-
-    public IEnumerator RateOfFire()
-    {
-        yield return new WaitForSeconds(1 / rateOfFire);
-        canShoot = true;
     }
 
     public void Reload()
@@ -101,13 +96,12 @@ public class Shotgun : Gun_attributes, IGun_interface
 
     public void ReloadCheck()
     {
-        if (bulletInMag != magSize && Input.GetKeyDown(KeyCode.R)) { Reload(); }
+        if (bulletInMag != magSize ) { Reload(); }
     }
 
     public void Shoot()
     {
-
-        if (Input.GetMouseButton(0) && canShoot && bulletInMag > 0)
+        if (canShoot && bulletInMag > 0)
         {
             if (isReloading)
             {
@@ -126,19 +120,20 @@ public class Shotgun : Gun_attributes, IGun_interface
 
                 gunMovement.PushBack(pushBackForce);
 
-
-                soundManager.PlayShotgunShot();
-                
+                sound_manager.instance.PlayShotgunShot();              
 
                 bulletInMag--;
 
-
                 canShoot = false;
-                StartCoroutine(soundManager.PlayShotgunClick(0.4f));
+                StartCoroutine(sound_manager.instance.PlayShotgunClick(0.4f));
                 StartCoroutine(RateOfFire());
             }
 
-
         }
+    }
+    public IEnumerator RateOfFire()
+    {
+        yield return new WaitForSeconds(1 / rateOfFire);
+        canShoot = true;
     }
 }

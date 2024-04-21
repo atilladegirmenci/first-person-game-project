@@ -4,7 +4,7 @@ using UnityEngine;
 
 public interface IEnemy 
 {
-    IEnumerator Die();
+    void Die();
     void GetHeadDamage(float damage);
     
     void GetBodyDamage(float damage);

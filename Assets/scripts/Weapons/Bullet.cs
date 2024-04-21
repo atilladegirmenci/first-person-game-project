@@ -30,7 +30,7 @@ public class Bullet : MonoBehaviour
         
         rb = gameObject.GetComponent<Rigidbody>();
         BulletTravel();
-        StartCoroutine(DestroyBullet(DefBulletLife));
+        DestroyBullet(DefBulletLife);
     }
 
     
@@ -44,25 +44,21 @@ public class Bullet : MonoBehaviour
         
         float x = Screen.width / 2f + (Random.Range(-1.0f,1.0f) * recoilX);
         float y = Screen.height / 2f + (Random.Range(-1.0f, 1.0f) * recoilY);
-        //RaycastHit hit;
-        //Vector3 look =Camera.main.transform.TransformDirection(Vector3.forward);
-        //Physics.Raycast(Camera.main.transform.position, look, out hit);
+        
         Ray ray = Camera.main.ScreenPointToRay(new Vector3(x,y,0)) ;
         
-
-         rb.AddForce(ray.direction.normalized * bulletSpeed , ForceMode.Impulse);
+        rb.AddForce(ray.direction.normalized * bulletSpeed , ForceMode.Impulse);
        
-
     }
 
 
     private void OnCollisionEnter(Collision collision)
     {
         IEnemy enemy = collision.gameObject.GetComponent<IEnemy>();
+
         if (collision.contacts[0].otherCollider.transform.gameObject.tag == "enemy head")
         {
-           // collision.gameObject.GetComponent<Enemy>().GetDamage(bulletDamage *5);
-
+           
             if(enemy != null)
             {
                 enemy.GetHeadDamage(bulletDamage);
@@ -72,7 +68,6 @@ public class Bullet : MonoBehaviour
         }
         else if (collision.contacts[0].otherCollider.transform.gameObject.tag == "enemy body")
         {
-            //collision.gameObject.GetComponent<Enemy>().GetDamage(bulletDamage);
 
             if (enemy != null)
             {
@@ -85,15 +80,13 @@ public class Bullet : MonoBehaviour
         {
             var newEffect =   Instantiate(bulletHole, collision.contacts[0].point +( collision.contacts[0].normal*.05f), Quaternion.FromToRotation(Vector3.up, collision.contacts[0].normal));
             newEffect.transform.parent = collision.gameObject.transform;
-          
         }
-        StartCoroutine(DestroyBullet(0));
+        DestroyBullet(0);
     }
 
-    private IEnumerator DestroyBullet(float delay)
+    private void DestroyBullet(float delay)
     {
-        yield return new WaitForSeconds(delay);
-        Destroy(gameObject);
+        Destroy(gameObject,delay);
     }
 
 

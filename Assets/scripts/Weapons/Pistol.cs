@@ -9,19 +9,13 @@ using static UnityEngine.GraphicsBuffer;
 
 public class Pistol : Gun_attributes, IGun_interface
 {
-    private Gun_attributes gunAttributes;
+    
     private Gun_movement gunMovement;
-    private sound_manager soundManager;
-   
-
-
-
     static public Pistol instance;
 
     private void Awake()
     {
-        gunMovement = Object.FindObjectOfType<Gun_movement>();
-        soundManager = Object.FindAnyObjectByType<sound_manager>();
+        gunMovement = Object.FindObjectOfType<Gun_movement>();   
     }
     private void OnEnable()
     {
@@ -80,7 +74,7 @@ public class Pistol : Gun_attributes, IGun_interface
                 gunMovement.PushBack(pushBackForce);
                 gunMovement.Recoil(recoilAmountX, recoilAmountY);
 
-                soundManager.PlayPistolSound();
+                sound_manager.instance.PlayPistolSound();
 
                 bulletInMag--;
 
@@ -124,7 +118,7 @@ public class Pistol : Gun_attributes, IGun_interface
     {
         
         yield return new WaitForSeconds(reloadTime);
-        soundManager.PlayReloadPistol();
+        sound_manager.instance.PlayReloadPistol();
         bulletInMag = magSize;
         canShoot = true;
         isReloading = false;

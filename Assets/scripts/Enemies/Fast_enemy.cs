@@ -34,20 +34,13 @@ public class Fast_enemy : MonoBehaviour , IEnemy
     void Update()
     {
         if(isAlive) transform.LookAt(player.transform);
-        //canvas.transform.LookAt(player.transform);
         healthbar.fillAmount = Mathf.Clamp(health / maxHealth, 0, 1);
-        if (health <= 0)
-        {
-            StartCoroutine(Die());
-        }
 
+        
         MoveTowardsPlayer();
-
     }
     private void MoveTowardsPlayer()
-    {
-        
-        
+    { 
         if(moveCooldown<=0 && isAlive)
         {
             
@@ -83,24 +76,35 @@ public class Fast_enemy : MonoBehaviour , IEnemy
         pos = new Vector3( Mathf.Clamp(-dirx,-1.3f,1.3f)*radius*Random.Range(0.5f,1f) , 0 , Mathf.Clamp(-dirz, -1.3f, 1.3f)*radius*Random.Range(0.5f, 1f));
         return pos; 
     }
-    public IEnumerator Die()
+    public void Die()
     {
         rb.freezeRotation = false;
         isAlive = false;
 
-
-        yield return new WaitForSeconds(5);
-        Destroy(gameObject);
+        Destroy(gameObject,5);
     }
 
     public void GetBodyDamage(float damage)
     {
         health -= damage;
+        checkForHealth();
     }
 
     public void GetHeadDamage(float damage)
     {
         health -= damage*3;
+        checkForHealth();
+    }
+    private void checkForHealth()
+    {
+        if (health <= 0)
+        {
+            if(isAlive)
+            {
+                ScoreSystem.instance.UpdateScore();
+            }
+            Die();
+        }
     }
     private void OnCollisionEnter(Collision collision)
     {
@@ -110,8 +114,6 @@ public class Fast_enemy : MonoBehaviour , IEnemy
             Quaternion rotation = Quaternion.LookRotation(direction);
 
             Instantiate(bloodEffect, collision.contacts[0].point, rotation);
-
-
         }
     }
 

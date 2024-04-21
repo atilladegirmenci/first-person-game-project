@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Explosive_enemy : MonoBehaviour , IEnemy
@@ -7,6 +8,7 @@ public class Explosive_enemy : MonoBehaviour , IEnemy
     Rigidbody rb;
     private float maxHealth;
 
+    private bool canExplode;
     public bool isAlive;
     private Player_controller player;
     public float damage;
@@ -27,6 +29,7 @@ public class Explosive_enemy : MonoBehaviour , IEnemy
         player = (Player_controller)FindAnyObjectByType(typeof(Player_controller));
         attackSound.Play();
         isAlive = true;
+        canExplode = true;
         rb= GetComponent<Rigidbody>();
         maxHealth = health;
     }
@@ -35,16 +38,9 @@ public class Explosive_enemy : MonoBehaviour , IEnemy
     {
         FallDown(); 
         FollowAndLookPlayer();
-       // canvas.transform.LookAt(GameObject.Find("Player").transform);
+       
         healthbar.fillAmount = Mathf.Clamp(health / maxHealth, 0, 1);
-        if (health <= 0)
-        {
-            StartCoroutine(Die());
-        }
-        if(!isAlive)
-        {
-            attackSound.Stop();
-        }
+       
     }
     private void OnCollisionEnter(Collision collision)
     {
@@ -54,16 +50,16 @@ public class Explosive_enemy : MonoBehaviour , IEnemy
             Quaternion rotation = Quaternion.LookRotation(direction);
 
             Instantiate(bloodEffect, collision.contacts[0].point, rotation);
-
-
         }
     }
    public  void Explode()
     {
-        if(isAlive) 
+        if(isAlive && canExplode) 
         {
+            canExplode = false;
+            transform.Find("head").gameObject.GetComponent<SphereCollider>().enabled = false;
             explosionSound.Play();
-            health = 0;
+            Die();
             Instantiate(explosionEffect, bodyPivot.transform.position, Quaternion.identity);
             rb.AddForceAtPosition(new Vector3(Random.Range(-8.0f, 8.0f), jumpOnDieAmount, Random.Range(-8.0f, 8.0f)), bodyPivot.transform.position, ForceMode.Impulse);
         }
@@ -80,24 +76,40 @@ public class Explosive_enemy : MonoBehaviour , IEnemy
         }
 
     }
-    public IEnumerator Die()
+    public void Die()
     {
        
         rb.freezeRotation = false;
         isAlive = false;
-      
-       
-        yield return new WaitForSeconds(5);
-        Destroy(gameObject);
+        attackSound.Stop();
+        healthbar.gameObject.SetActive(false);
+
+        Destroy(gameObject,5);
+
     }
 
     public void GetBodyDamage(float damage)
     {
         health -= damage;
+
+        if(health <= 0)
+        {
+            if(isAlive)
+            {
+                ScoreSystem.instance.UpdateScore();
+            }
+            
+            Die();
+        }
     }
 
     public void GetHeadDamage(float damage)
     {
+        if (isAlive)
+        {
+            ScoreSystem.instance.UpdateScore();
+        }
+
         Explode();
     }
 

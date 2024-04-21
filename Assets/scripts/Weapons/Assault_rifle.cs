@@ -7,17 +7,11 @@ public class Assault_rifle : Gun_attributes,IGun_interface
 {
 
     private Gun_movement gunMovement;
-    private sound_manager soundManager;
-    private Gun_attributes gunAttributes;
-   
-
-    
     static public Assault_rifle instance;
 
     private void Awake()
     {
         gunMovement = Object.FindObjectOfType<Gun_movement>();
-        soundManager = Object.FindAnyObjectByType<sound_manager>();
     }
     private void OnEnable()
     {
@@ -29,10 +23,8 @@ public class Assault_rifle : Gun_attributes,IGun_interface
     {
 
         instance = this;
-      
         canShoot = true;
         bulletInMag = magSize;
-       
     }
    
 
@@ -81,7 +73,7 @@ public class Assault_rifle : Gun_attributes,IGun_interface
                 gunMovement.PushBack(pushBackForce);
                 gunMovement.Recoil(recoilAmountX, recoilAmountY);
 
-                soundManager.PlayARSound();
+                sound_manager.instance.PlayARSound();
 
                 bulletInMag--;
 
@@ -110,7 +102,7 @@ public class Assault_rifle : Gun_attributes,IGun_interface
 
     public IEnumerator onReload() 
     {
-        soundManager.PlayARLoad();
+        sound_manager.instance.PlayARLoad();
         yield return new WaitForSeconds(reloadTime);
         bulletInMag = magSize;
         canShoot = true;

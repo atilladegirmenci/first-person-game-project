@@ -4,16 +4,13 @@ using UnityEngine;
 
 public class Fast_enemy_radius : MonoBehaviour
 {
-    private Player_health player;
 
-    // Start is called before the first frame update
+
     void Start()
     {
-        player = Object.FindAnyObjectByType<Player_health>();
 
     }
 
-    // Update is called once per frame
     void Update()
     {
         
@@ -28,6 +25,6 @@ public class Fast_enemy_radius : MonoBehaviour
     }
     public void DamagePlayer()
     {
-        player.TakeDamage(transform.parent.GetComponent<Fast_enemy>().damage);
+        Player_health.instance.TakeDamage(transform.parent.GetComponent<Fast_enemy>().damage);
     }
 }

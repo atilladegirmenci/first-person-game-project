@@ -74,7 +74,7 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_Enabled: 1
-  m_Radius: 0.7
+  m_Radius: 0.8
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: -0.5, z: 0}
@@ -160,7 +160,7 @@ MonoBehaviour:
   isAlive: 0
   damage: 20
   moveSound: {fileID: 5887985177855707742}
-  moveCooldown: 2
+  moveCooldown: 1.5
   radius: 6
   bodyPivot: {fileID: 71886731440274487}
   bloodEffect: {fileID: 9125336662690748202, guid: bd2bc99159a76044ca418a0e79d9938c, type: 3}

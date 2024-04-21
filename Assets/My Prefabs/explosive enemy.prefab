@@ -5100,7 +5100,7 @@ MonoBehaviour:
   attackSound: {fileID: 6064429463465572489}
   explosionSound: {fileID: 1476801565461602663}
   explosionEffect: {fileID: 2828029495603180752, guid: 17f3f9bb2adfaaa4da215dcaff651a10, type: 3}
-  enemySpeed: 7
+  enemySpeed: 10.5
   bodyPivot: {fileID: 3795750178978859912}
   bloodEffect: {fileID: 9125336662690748202, guid: bd2bc99159a76044ca418a0e79d9938c, type: 3}
   healthbar: {fileID: 3795750179176604060}

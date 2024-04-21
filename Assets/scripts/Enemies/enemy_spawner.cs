@@ -11,16 +11,26 @@ public class enemy_spawner : MonoBehaviour
     [SerializeField]  private GameObject fastEnenmy;
     float resetCldwn1 =3;
     float resetCldwn2 = 3;
-    
+    [SerializeField] private GameObject spwnp1, spwnp2, spwnp3;     
     void Start()
     {
        
     }
 
-    // Update is called once per frame
     void Update()
     {
         ChecForEnemyType();
+    }
+    private Vector3 RandomSpawnPoint()
+    {
+        int rndm = Random.Range(1, 4);
+        switch(rndm)
+        {
+            case 1: return spwnp1.transform.position;
+            case 2: return spwnp2.transform.position;
+            case 3: return spwnp3.transform.position;
+            default: return new Vector3(0,0,0);
+        }
     }
 
     private void ChecForEnemyType()
@@ -32,7 +42,7 @@ public class enemy_spawner : MonoBehaviour
             if (resetCldwn1 <= 0)
             {
                 EnemySpawner(explosiveEnemy);
-                resetCldwn1 = 8;
+                resetCldwn1 = 6;
             }
             else
             {
@@ -46,7 +56,7 @@ public class enemy_spawner : MonoBehaviour
             if (resetCldwn2 <= 0)
             {
                 EnemySpawner(fastEnenmy);
-                resetCldwn2 = 7;
+                resetCldwn2 = 8;
             }
             else
             {
@@ -57,7 +67,7 @@ public class enemy_spawner : MonoBehaviour
 
     private void EnemySpawner(GameObject enemytype)
     {
-        Instantiate(enemytype, new Vector3(Random.Range(-20, 21), 1.5f, 50), transform.rotation);
+        Instantiate(enemytype, RandomSpawnPoint(), transform.rotation);
 
 
     }
