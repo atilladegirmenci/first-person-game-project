@@ -36,11 +36,9 @@ public class Explosive_enemy : MonoBehaviour , IEnemy
 
     void Update()
     {
-        FallDown(); 
         FollowAndLookPlayer();
        
-        healthbar.fillAmount = Mathf.Clamp(health / maxHealth, 0, 1);
-       
+        healthbar.fillAmount = Mathf.Clamp(health / maxHealth, 0, 1);  
     }
     private void OnCollisionEnter(Collision collision)
     {
@@ -61,7 +59,7 @@ public class Explosive_enemy : MonoBehaviour , IEnemy
             explosionSound.Play();
             Die();
             Instantiate(explosionEffect, bodyPivot.transform.position, Quaternion.identity);
-            rb.AddForceAtPosition(new Vector3(Random.Range(-8.0f, 8.0f), jumpOnDieAmount, Random.Range(-8.0f, 8.0f)), bodyPivot.transform.position, ForceMode.Impulse);
+            rb.AddForceAtPosition(new Vector3(Random.Range(-6.0f, 6.0f), jumpOnDieAmount, Random.Range(-6.0f, 6.0f)), bodyPivot.transform.position, ForceMode.Impulse);
         }
        
        
@@ -71,7 +69,7 @@ public class Explosive_enemy : MonoBehaviour , IEnemy
        
         if (isAlive)
         {
-            transform.LookAt((GameObject.Find("Player").transform));
+            transform.LookAt((player.transform));
             transform.position = Vector3.MoveTowards(transform.position, player.transform.position, enemySpeed * Time.deltaTime);
         }
 
@@ -113,12 +111,12 @@ public class Explosive_enemy : MonoBehaviour , IEnemy
         Explode();
     }
 
-    private void FallDown()
-    {
-        if (rb.velocity.y < -0.1)
-        {
-            transform.position -= new Vector3(0, 0.01f, 0);
-        }
-    }
+    //private void FallDown()
+    //{
+    //    if (rb.velocity.y < -0.1)
+    //    {
+    //        transform.position -= new Vector3(0, 0.01f, 0);
+    //    }
+    //}
 
 }

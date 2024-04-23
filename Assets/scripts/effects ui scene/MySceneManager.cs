@@ -7,6 +7,7 @@ public class MySceneManager : MonoBehaviour
 {
   
     static public MySceneManager instance;
+    [SerializeField] private GameObject youLostText;
     void Start()
     {
         instance = this;
@@ -28,11 +29,17 @@ public class MySceneManager : MonoBehaviour
     {
         
     }
-    public void OpenDeathScene()
+    public IEnumerator OpenDeathScene()
     {
-       
-        SceneManager.LoadScene("DeathScene");
-        
+        Time.timeScale = 0.5f;
+        youLostText.SetActive(true);
+
+        yield return new WaitForSeconds(1);
+
+        Time.timeScale = 1;
+        youLostText.SetActive(false); 
+
+        SceneManager.LoadScene("DeathScene");   
     }
     public void Restart()
     {
