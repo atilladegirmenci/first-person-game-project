@@ -45,7 +45,6 @@ public class Shotgun : Gun_attributes, IGun_interface
         }
         else
         {
-            
             magTextUI.text = "RELOADING " + bulletInMag.ToString() + "/" + magSize.ToString();
         }
     }
@@ -66,13 +65,7 @@ public class Shotgun : Gun_attributes, IGun_interface
     {
         for(int i = bulletInMag +1; i <= magSize;i++)
         {
-
-            //if (Input.GetMouseButton(0) && bulletInMag > 0 && bulletInMag < magSize)
-            //{
-            //    break;
-            //}
-            //else
-            
+      
            yield return new WaitForSeconds(reloadTime);
 
            sound_manager.instance.PlayShotgunShellLoad();
@@ -120,7 +113,8 @@ public class Shotgun : Gun_attributes, IGun_interface
 
                 gunMovement.PushBack(pushBackForce);
 
-                sound_manager.instance.PlayShotgunShot();              
+                sound_manager.instance.PlayShotgunShot();
+                Player_controller.instance.PushBack(Vector3.back, 300);
 
                 bulletInMag--;
 

@@ -74,7 +74,7 @@ public class Assault_rifle : Gun_attributes,IGun_interface
                 gunMovement.Recoil(recoilAmountX, recoilAmountY);
 
                 sound_manager.instance.PlayARSound();
-
+                
                 bulletInMag--;
 
 

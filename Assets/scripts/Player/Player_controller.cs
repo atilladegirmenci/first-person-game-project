@@ -120,7 +120,10 @@ public class Player_controller : MonoBehaviour
             maxSpeed = crouchSpeed;
         }
     }
-
+    public void PushBack(Vector3 direction , float magnitude)
+    {
+        rb.AddRelativeForce(direction * magnitude);
+    }
     private  void Crouch()
     {
         if (Input.GetKeyDown(KeyCode.LeftControl))

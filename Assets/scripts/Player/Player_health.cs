@@ -27,6 +27,7 @@ public class Player_health : MonoBehaviour
         {
            StartCoroutine(MySceneManager.instance.OpenDeathScene()); 
         }
+
         if (gothitEffect.GetComponent<Image>().color.a > 0 && playerHealth >0)
         {
             Color color = gothitEffect.GetComponent<Image>().color;
