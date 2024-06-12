@@ -38,11 +38,10 @@ public class Gun_movement : MonoBehaviour
     
     void Update()
     {
-      
-        StartCoroutine(moveToDefault()) ;
+        StartCoroutine(MoveToDefault()) ;
         GunRotation();  
     }
-    public void setValues(float _moveToDefSpeed,Quaternion _gunRot)
+    public void SetValues(float _moveToDefSpeed,Quaternion _gunRot)
     {
         moveToDefSpeed = _moveToDefSpeed;
         gunRot = _gunRot;
@@ -57,7 +56,7 @@ public class Gun_movement : MonoBehaviour
         rotationY = Mathf.Clamp(rotationY, -rotationYLimit, rotationYLimit);
 
        
-        if(isMouseMoving() && !ADSIng)
+        if(IsMouseMoving() && !ADSIng)
         {
             transform.localRotation = Quaternion.Euler(rotationX + gunRot.eulerAngles.x, rotationY +gunRot.eulerAngles.y, rotationY +gunRot.eulerAngles.z); ;
             
@@ -113,7 +112,7 @@ public class Gun_movement : MonoBehaviour
         if(i%2==1) 
         {
             ADSIng = true;
-            // crossHair.SetActive(true);
+            
             playerCamera.fieldOfView -= 10;
 
             tempPos = transform.localPosition;
@@ -141,10 +140,10 @@ public class Gun_movement : MonoBehaviour
     }
 
 
-    public IEnumerator moveToDefault()
+    public IEnumerator MoveToDefault()
     {
         
-            if (transform.localRotation != defaultRot && !isMouseMoving())
+            if (transform.localRotation != defaultRot && !IsMouseMoving())
             {
 
                 yield return new WaitForSeconds(0.1f);
@@ -159,7 +158,7 @@ public class Gun_movement : MonoBehaviour
         
     }
 
-    private bool isMouseMoving()
+    private bool IsMouseMoving()
     {
         if (Input.GetAxis("Mouse X") <= -0.1 || Input.GetAxis("Mouse X") >= 0.1 || Input.GetAxis("Mouse Y") <= -0.1 || Input.GetAxis("Mouse Y") >= 0.1)
         { return true; }

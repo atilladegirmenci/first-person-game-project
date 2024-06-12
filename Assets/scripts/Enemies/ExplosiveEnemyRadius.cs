@@ -5,8 +5,7 @@ using UnityEngine;
 
 public class ExplosiveEnemyRadius : MonoBehaviour
 {
-    
-    
+
     void Start()
     {
         
@@ -21,11 +20,10 @@ public class ExplosiveEnemyRadius : MonoBehaviour
     {
         if (other.gameObject.tag == "Player" && transform.parent.GetComponent<Explosive_enemy>().isAlive)
         {
-            
             transform.parent.GetComponent<Explosive_enemy>().Explode();
+            Player_controller.instance.PushBack(new Vector3(transform.position.x - Player_controller.instance.transform.position.x, 0.2f, Player_controller.instance.transform.position.z - transform.position.z), 1000);
             gameObject.SetActive(false);
             DamagePlayer();
-            Debug.Log("GAME LOST");
         }
     }
     public void  DamagePlayer()

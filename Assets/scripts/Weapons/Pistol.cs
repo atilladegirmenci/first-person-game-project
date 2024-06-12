@@ -21,43 +21,27 @@ public class Pistol : Gun_attributes, IGun_interface
     {
         canShoot = true;
         gunMovement.AdjustPosRotForGun_OnSwitch(defPos, defRot);
-        gunMovement.setValues(moveToDefSpeed,defRot);
+        gunMovement.SetValues(moveToDefSpeed,defRot);
     }
     void Start()
     {
-        
-
         instance = this;
-
-       
         canShoot = true;
         bulletInMag = magSize;
-        
     }
    
     void Update()
     {
-
-        Shoot();
-        ReloadCheck();
         ADS();
-
-
-        if (!isReloading)
-        {
-            magTextUI.text = bulletInMag.ToString() + "/" + magSize.ToString();
-        }
-        else
-        {
-            magTextUI.text = "RELOADING";
-        }
-
-
+        if (Input.GetMouseButtonDown(0)) { Shoot(); }
+        if (Input.GetKeyDown(KeyCode.R)) { ReloadCheck(); }
+        
+        UIManager.instance.BulletCountText(isReloading, bulletInMag, magSize);
     }
 
     public void Shoot()
     {
-       if(Input.GetMouseButtonDown(0) &&canShoot)
+       if(canShoot && bulletInMag >0)
         {
          
             if(isReloading)
@@ -99,13 +83,7 @@ public class Pistol : Gun_attributes, IGun_interface
     }
     public void ReloadCheck()
     {
-        if (bulletInMag <=0)
-        {
-            canShoot = false;
-        }
-        
-        
-        if (bulletInMag != magSize && Input.GetKeyDown(KeyCode.R)) { Reload(); }
+        if (bulletInMag != magSize) { Reload(); }
     }
     public void Reload()
     {
@@ -128,28 +106,4 @@ public class Pistol : Gun_attributes, IGun_interface
        yield return new WaitForSeconds(1/rateOfFire);
        canShoot = true;
     }
-
-    //void DrawLine()
-    //{
-
-
-    //    Ray ray = new Ray(muzzle.transform.position, muzzle.transform.forward);
-    //    RaycastHit hit;
-
-    //    if (Physics.Raycast(muzzle.transform.position, muzzle.transform.forward, out hit, Mathf.Infinity))
-    //    {
-    //        Debug.DrawLine(ray.origin, hit.point, Color.red);
-         
-
-
-
-    //        lineRenderer = GetComponent<LineRenderer>();
-    //        lineRenderer.SetPosition(0, ray.origin);
-    //        lineRenderer.SetPosition(1, hit.point);
-
-    //    }
-
-        
-       
-    //}
 }

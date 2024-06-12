@@ -54,7 +54,7 @@ public class enemy_spawner : MonoBehaviour
     private IEnumerator SpawnerCooldown()
     {
         float cooldownTime = UnityEngine.Random.Range(3f, 8f);
-        Debug.Log(cooldownTime);
+        
         yield return new WaitForSeconds(cooldownTime);
        
         CheckEnemyType();

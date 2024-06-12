@@ -19,7 +19,7 @@ public class Shotgun : Gun_attributes, IGun_interface
 
     private void OnEnable()
     {
-        gunMovement.setValues(moveToDefSpeed, defRot);
+        gunMovement.SetValues(moveToDefSpeed, defRot);
         gunMovement.AdjustPosRotForGun_OnSwitch(defPos, defRot);
         canShoot = true;
     }
@@ -36,17 +36,8 @@ public class Shotgun : Gun_attributes, IGun_interface
         ADS();
         if (Input.GetMouseButtonDown(0)) { Shoot(); }
         if (Input.GetKeyDown(KeyCode.R)) { ReloadCheck(); }
-        
 
-        if (!isReloading)
-        {
-            magTextUI.text = bulletInMag.ToString() + "/" + magSize.ToString();
-
-        }
-        else
-        {
-            magTextUI.text = "RELOADING " + bulletInMag.ToString() + "/" + magSize.ToString();
-        }
+        UIManager.instance.BulletCountText(isReloading,bulletInMag,magSize);
     }
 
     public void ADS()
@@ -72,7 +63,6 @@ public class Shotgun : Gun_attributes, IGun_interface
 
            bulletInMag = i;
             
-                        
         }
 
         StartCoroutine(sound_manager.instance.PlayShotgunClick(0.4f));

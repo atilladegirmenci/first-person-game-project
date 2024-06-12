@@ -59,7 +59,6 @@ public class Explosive_enemy : MonoBehaviour , IEnemy
             explosionSound.Play();
             Die();
             Instantiate(explosionEffect, bodyPivot.transform.position, Quaternion.identity);
-            Player_controller.instance.PushBack( new Vector3(player.transform.position.x - transform.position.x,0.1f,player.transform.position.z-transform.position.z), 700);
             rb.AddForceAtPosition(new Vector3(Random.Range(-6.0f, 6.0f), jumpOnDieAmount, Random.Range(-6.0f, 6.0f)), bodyPivot.transform.position, ForceMode.Impulse);
         }
        
@@ -95,7 +94,7 @@ public class Explosive_enemy : MonoBehaviour , IEnemy
         {
             if(isAlive)
             {
-                ScoreSystem.instance.UpdateScore();
+                UIManager.instance.UpdateScore();
             }
             
             Die();
@@ -106,7 +105,7 @@ public class Explosive_enemy : MonoBehaviour , IEnemy
     {
         if (isAlive)
         {
-            ScoreSystem.instance.UpdateScore();
+            UIManager.instance.UpdateScore();
         }
 
         Explode();

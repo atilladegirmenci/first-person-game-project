@@ -9,7 +9,6 @@ public class Gun_attributes : MonoBehaviour
     public Quaternion defRot;
     public Vector3 ADSPos;
     public Quaternion ADSRot;
-    public TextMeshProUGUI magTextUI;
     public bool canShoot;
     public float rateOfFire;
     [Range (0,25)]  public float recoilAmountX;

@@ -167,17 +167,17 @@ public class Player_controller : MonoBehaviour
 
         playerCamera.transform.localRotation = Quaternion.Euler(rotationX, 0, 0);
     }
-   
+
 
     private void FallDown()
     {
-        if(rb.velocity.y < -0.1 )
+        if (rb.velocity.y < -0.1)
         {
-            transform.position -=  new Vector3(0,fallDownSpeed,0);
+            transform.position -= new Vector3(0, fallDownSpeed, 0);
         }
     }
 
-    
+
     public bool isGrounded()
     {
         return (Physics.BoxCast(transform.position, boxSize, Vector3.down, transform.rotation, maxDistance, ground));

@@ -15,13 +15,12 @@ public class Assault_rifle : Gun_attributes,IGun_interface
     }
     private void OnEnable()
     {
-        gunMovement.setValues(moveToDefSpeed,defRot);
+        gunMovement.SetValues(moveToDefSpeed,defRot);
         gunMovement.AdjustPosRotForGun_OnSwitch(defPos, defRot);
         canShoot = true;
     }
     void Start()
     {
-
         instance = this;
         canShoot = true;
         bulletInMag = magSize;
@@ -31,18 +30,10 @@ public class Assault_rifle : Gun_attributes,IGun_interface
     void Update()
     {
         ADS();
-        Shoot();
-        ReloadCheck();
-        
-        if(!isReloading)
-        {
-            magTextUI.text = bulletInMag.ToString() + "/" + magSize.ToString();
-        }
-        else
-        {
-            magTextUI.text = "RELOADING";
-        }
-        
+        if (Input.GetMouseButton(0)) { Shoot(); }
+        if (Input.GetKeyDown(KeyCode.R)) { ReloadCheck(); }
+
+        UIManager.instance.BulletCountText(isReloading, bulletInMag, magSize);
     }
    
 
@@ -51,13 +42,12 @@ public class Assault_rifle : Gun_attributes,IGun_interface
         isReloading = true;
         canShoot = false;
         StartCoroutine(onReload());
-       
     }
 
     public void Shoot()
     {
 
-        if (Input.GetMouseButton(0) && canShoot && bulletInMag > 0)
+        if (canShoot && bulletInMag > 0)
         {
             if (isReloading)
             {
@@ -111,14 +101,12 @@ public class Assault_rifle : Gun_attributes,IGun_interface
     public void ReloadCheck()
     {
        
-        if (bulletInMag != magSize && Input.GetKeyDown(KeyCode.R)) { Reload(); }
+        if (bulletInMag != magSize) { Reload(); }
     }
 
    
     public IEnumerator RateOfFire()
     {
-
-       
         yield return new WaitForSeconds(1 / rateOfFire);
         canShoot = true;
     }

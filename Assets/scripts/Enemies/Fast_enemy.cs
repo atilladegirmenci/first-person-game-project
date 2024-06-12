@@ -43,11 +43,10 @@ public class Fast_enemy : MonoBehaviour , IEnemy
     { 
         if(moveCooldown<=0 && isAlive)
         {
-            
            transform.position = Vector3.MoveTowards(transform.position, transform.position + FindRandomPos(), 100);
-           
+          
             //transform.position += FindRandomPos();
-           // transform.Translate(FindRandomPos());
+            //transform.Translate(FindRandomPos());
             
             moveCooldown = cooldownReset;
             moveSound.Play();
@@ -87,21 +86,21 @@ public class Fast_enemy : MonoBehaviour , IEnemy
     public void GetBodyDamage(float damage)
     {
         health -= damage;
-        checkForHealth();
+        CheckForHealth();
     }
 
     public void GetHeadDamage(float damage)
     {
         health -= damage*3;
-        checkForHealth();
+        CheckForHealth();
     }
-    private void checkForHealth()
+    private void CheckForHealth()
     {
         if (health <= 0)
         {
             if(isAlive)
             {
-                ScoreSystem.instance.UpdateScore();
+                UIManager.instance.UpdateScore();
             }
             Die();
         }
