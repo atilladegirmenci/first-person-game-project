@@ -19,8 +19,8 @@ public class Player_health : MonoBehaviour
     
     void Update()
     {
-        //UIManager.instance.HPTextUI(playerHealth);
-
+       
+        
         if (playerHealth <= 0)
         {
            StartCoroutine(MySceneManager.instance.OpenDeathScene()); 
@@ -30,7 +30,16 @@ public class Player_health : MonoBehaviour
 
     public void TakeDamage(float damage)
     {
-        UIManager.instance.FlashScreenRed();
+        UIManager.instance.FlashScreen(Color.red);
         playerHealth -= damage;
+
+        if (playerHealth <= 0)
+        {
+            playerHealth = 0;
+        }
+    }
+    public void Heal(int amount)
+    {
+        playerHealth += amount;
     }
 }

@@ -3,13 +3,11 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class Explosive_enemy : MonoBehaviour , IEnemy
+public class Explosive_enemy : EnemyAttributes , IEnemy
 {
     Rigidbody rb;
-    private float maxHealth;
 
     private bool canExplode;
-    public bool isAlive;
     private Player_controller player;
     public float damage;
     [SerializeField] private AudioSource attackSound;
@@ -17,13 +15,8 @@ public class Explosive_enemy : MonoBehaviour , IEnemy
     [SerializeField] private ParticleSystem explosionEffect;
     [SerializeField] private float enemySpeed;
     [SerializeField] private GameObject bodyPivot;
-    [SerializeField] private ParticleSystem bloodEffect;
-    [SerializeField] UnityEngine.UI.Image healthbar;
-    [SerializeField] Canvas canvas;
-    [SerializeField] private float health;
     [SerializeField] private float jumpOnDieAmount;
 
-   // private bool forceSwitch;
     void Start()
     {
         player = (Player_controller)FindAnyObjectByType(typeof(Player_controller));
@@ -38,7 +31,7 @@ public class Explosive_enemy : MonoBehaviour , IEnemy
     {
         FollowAndLookPlayer();
        
-        healthbar.fillAmount = Mathf.Clamp(health / maxHealth, 0, 1);  
+        healthBar.fillAmount = Mathf.Clamp(health / maxHealth, 0, 1);  
     }
     private void OnCollisionEnter(Collision collision)
     {
@@ -80,7 +73,7 @@ public class Explosive_enemy : MonoBehaviour , IEnemy
         rb.freezeRotation = false;
         isAlive = false;
         attackSound.Stop();
-        healthbar.gameObject.SetActive(false);
+        canvas.gameObject.SetActive(false);
 
         Destroy(gameObject,5);
 
@@ -111,12 +104,6 @@ public class Explosive_enemy : MonoBehaviour , IEnemy
         Explode();
     }
 
-    //private void FallDown()
-    //{
-    //    if (rb.velocity.y < -0.1)
-    //    {
-    //        transform.position -= new Vector3(0, 0.01f, 0);
-    //    }
-    //}
+   
 
 }

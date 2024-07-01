@@ -12,6 +12,7 @@ public class sound_manager : MonoBehaviour
     [SerializeField] private AudioSource shotgunLoadShell;
     [SerializeField] private AudioSource ARLoad;
     [SerializeField] private AudioSource PistolLoad;
+    [SerializeField] private AudioSource bite;
 
     static public sound_manager instance;
     void Start()
@@ -39,6 +40,10 @@ public class sound_manager : MonoBehaviour
     public void PlayShotgunShot()
     {
         shotgunShot.Play();
+    }
+    public void PlayBiteSound()
+    {
+        bite.Play();
     }
     public IEnumerator PlayShotgunClick(float delay)
     {

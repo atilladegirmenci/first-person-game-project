@@ -17,7 +17,6 @@ public class HeadBobSystem : MonoBehaviour
         startPos = transform.localPosition;
     }
 
-    // Update is called once per frame
     void Update()
     {
        CheckForHeadBob();

@@ -12,14 +12,9 @@ public class Switch_gun : MonoBehaviour
 
     void Start()
     {
-
         nrWeapons = weapons.Length;
 
-        
         SwitchWeapon(currentWeapon); // Set default gun
-        //SwitchWeapon(currentWeapon + 1);
-        //SwitchWeapon(currentWeapon);
-        
 
     }
 

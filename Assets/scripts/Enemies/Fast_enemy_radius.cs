@@ -4,17 +4,6 @@ using UnityEngine;
 
 public class Fast_enemy_radius : MonoBehaviour
 {
-
-
-    void Start()
-    {
-
-    }
-
-    void Update()
-    {
-        
-    }
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "Player" && transform.parent.GetComponent<Fast_enemy>().isAlive)

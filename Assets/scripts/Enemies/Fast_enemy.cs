@@ -3,38 +3,31 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class Fast_enemy : MonoBehaviour , IEnemy
+public class Fast_enemy : EnemyAttributes , IEnemy
 {
 
     private GameObject player;
-    private float maxHealth;
     private Rigidbody rb;
-    public bool isAlive;
     private float cooldownReset;
     public float damage;
     [SerializeField] private AudioSource  moveSound;
     [SerializeField] private float moveCooldown;
     [SerializeField] private float radius;
     [SerializeField] private GameObject bodyPivot;
-    [SerializeField] private ParticleSystem bloodEffect;
-    [SerializeField] UnityEngine.UI.Image healthbar;
-    [SerializeField] Canvas canvas;
-    [SerializeField] private float health;
     
     void Start()
     {
         cooldownReset = moveCooldown;
-        player = (GameObject.Find("Player"));
+        player = GameObject.Find("Player");
         rb = GetComponent<Rigidbody>();
         maxHealth = health;
         isAlive = true; 
     }
 
-    // Update is called once per frame
     void Update()
     {
         if(isAlive) transform.LookAt(player.transform);
-        healthbar.fillAmount = Mathf.Clamp(health / maxHealth, 0, 1);
+        healthBar.fillAmount = Mathf.Clamp(health / maxHealth, 0, 1);
 
         
         MoveTowardsPlayer();
@@ -45,8 +38,6 @@ public class Fast_enemy : MonoBehaviour , IEnemy
         {
            transform.position = Vector3.MoveTowards(transform.position, transform.position + FindRandomPos(), 100);
           
-            //transform.position += FindRandomPos();
-            //transform.Translate(FindRandomPos());
             
             moveCooldown = cooldownReset;
             moveSound.Play();
@@ -61,14 +52,6 @@ public class Fast_enemy : MonoBehaviour , IEnemy
         Vector3 pos;
         float dirx;
         float dirz;
-        //var vector2 = Random.insideUnitCircle.normalized * radius;
-        //pos = new Vector3(vector2.x, transform.position.y, vector2.y);
-
-
-        //int angle = Random.Range(-50, 50);
-        //float x = Mathf.Sin(angle) * radius;
-        //float z = Mathf.Cos(angle) * radius;
-        //pos = new Vector3(x, transform.position.y, z);
 
         dirx = transform.position.x - player.transform.position.x;
         dirz =transform.position.z - player.transform.position.z;
@@ -79,6 +62,8 @@ public class Fast_enemy : MonoBehaviour , IEnemy
     {
         rb.freezeRotation = false;
         isAlive = false;
+        canvas.gameObject.SetActive(false);
+        CollectableSpawner.Instance.SpawnHeal(5, transform.position);
 
         Destroy(gameObject,5);
     }

@@ -57,9 +57,10 @@ public class UIManager : MonoBehaviour
         hpTextUI.text = $"HP: {Player_health.instance.playerHealth}";
     }
 
-    public void FlashScreenRed()
+    public void FlashScreen(Color choosenColor)
     {
         Color color = gothitEffectImage.GetComponent<Image>().color;
+        color = choosenColor;
         color.a = 0.6f;
         gothitEffectImage.GetComponent<Image>().color = color;
     }

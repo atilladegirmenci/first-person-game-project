@@ -6,16 +6,6 @@ using UnityEngine;
 public class ExplosiveEnemyRadius : MonoBehaviour
 {
 
-    void Start()
-    {
-        
-    }
-
-    
-    void Update()
-    {
-        
-    }
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "Player" && transform.parent.GetComponent<Explosive_enemy>().isAlive)
