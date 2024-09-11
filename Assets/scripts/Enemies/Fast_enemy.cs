@@ -60,10 +60,11 @@ public class Fast_enemy : EnemyAttributes , IEnemy
     }
     public void Die()
     {
+        
         rb.freezeRotation = false;
         isAlive = false;
         canvas.gameObject.SetActive(false);
-        CollectableSpawner.Instance.SpawnHeal(5, transform.position);
+        CollectableSpawner.Instance.SpawnCollectableOnDie( transform.position);
 
         Destroy(gameObject,5);
     }
@@ -86,8 +87,9 @@ public class Fast_enemy : EnemyAttributes , IEnemy
             if(isAlive)
             {
                 UIManager.instance.UpdateScore();
+                Die();
             }
-            Die();
+           
         }
     }
     private void OnCollisionEnter(Collision collision)

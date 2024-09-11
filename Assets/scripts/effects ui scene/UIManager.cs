@@ -11,12 +11,18 @@ public class UIManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI hpTextUI;
     [SerializeField] private TextMeshProUGUI scoreTextUI;
     [SerializeField] private GameObject gothitEffectImage;
+    [SerializeField] private TextMeshProUGUI collectedNameTextUI;
+    [SerializeField] private TextMeshProUGUI collectedAmountTextUI;
 
     static public UIManager instance;
 
-    void Start()
+    private void Awake()
     {
         instance = this;
+    }
+    void Start()
+    {
+       
         score = 0;
     }
 
@@ -39,16 +45,16 @@ public class UIManager : MonoBehaviour
         return;
     }
 
-    public void BulletCountText(bool isReloading, int bulletInMag, int MagSize)
+    public void BulletCountText(bool isReloading, int bulletInMag, int reservebullet)
     {
         if (!isReloading)
         {
-            magTextUI.text = bulletInMag.ToString() + "/" + MagSize.ToString();
+            magTextUI.text = bulletInMag.ToString() + "/" + reservebullet.ToString();
 
         }
         else
         {
-            magTextUI.text = "RELOADING " + bulletInMag.ToString() + "/" + MagSize.ToString();
+            magTextUI.text = "RELOADING " + bulletInMag.ToString() + "/" + reservebullet.ToString();
         }
     }
 
@@ -56,6 +62,22 @@ public class UIManager : MonoBehaviour
     {
         hpTextUI.text = $"HP: {Player_health.instance.playerHealth}";
     }
+
+    public IEnumerator CollectedItemOnUI(string amount, string name)
+    {
+       
+        collectedAmountTextUI.text ="+" + amount;
+        collectedNameTextUI.text = name;
+
+        collectedNameTextUI.gameObject.SetActive(true);
+        collectedAmountTextUI.gameObject.SetActive(true);
+
+        yield return new WaitForSeconds(3);
+
+        collectedNameTextUI.gameObject.SetActive(false);
+        collectedAmountTextUI.gameObject.SetActive(false);
+    }
+
 
     public void FlashScreen(Color choosenColor)
     {

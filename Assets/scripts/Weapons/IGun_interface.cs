@@ -8,6 +8,7 @@ public interface IGun_interface
     void Reload();
     void ADS();
     void ReloadCheck();
+    void UpdateBullet(int bulletAmount);
     IEnumerator RateOfFire();
     IEnumerator onReload();
 

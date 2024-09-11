@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1906106099810681769}
   - component: {fileID: 5200322667601652486}
   - component: {fileID: 3812132941553609}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: spark effect
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4836,7 +4836,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6833736748457538651}
-  m_Layer: 5
+  m_Layer: 11
   m_Name: health Bar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4877,7 +4877,7 @@ GameObject:
   - component: {fileID: 3795750178151352258}
   - component: {fileID: 3795750178151352268}
   - component: {fileID: 3795750178151352259}
-  m_Layer: 5
+  m_Layer: 11
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4978,7 +4978,7 @@ GameObject:
   - component: {fileID: 3795750178261159966}
   - component: {fileID: 3795750178261159965}
   - component: {fileID: 3795750178261159964}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: head
   m_TagString: enemy head
   m_Icon: {fileID: 0}
@@ -5076,7 +5076,7 @@ GameObject:
   - component: {fileID: 3795750178402208990}
   - component: {fileID: 1476801565461602663}
   - component: {fileID: 6064429463465572489}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: explosive enemy
   m_TagString: enemy
   m_Icon: {fileID: 0}
@@ -5350,7 +5350,7 @@ GameObject:
   - component: {fileID: 3795750178665851538}
   - component: {fileID: 3795750178665851537}
   - component: {fileID: 3795750178665851536}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: body
   m_TagString: enemy body
   m_Icon: {fileID: 0}
@@ -5445,7 +5445,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3795750178978859913}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: body pivot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5478,7 +5478,7 @@ GameObject:
   - component: {fileID: 3795750179176604050}
   - component: {fileID: 3795750179176604051}
   - component: {fileID: 3795750179176604060}
-  m_Layer: 5
+  m_Layer: 11
   m_Name: Health bar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5554,7 +5554,7 @@ GameObject:
   - component: {fileID: 7872974450983167903}
   - component: {fileID: 8486530409278002930}
   - component: {fileID: 7658633812479071017}
-  m_Layer: 5
+  m_Layer: 11
   m_Name: Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5630,7 +5630,7 @@ GameObject:
   - component: {fileID: 2865383885616933720}
   - component: {fileID: 8316320999707890271}
   - component: {fileID: 6406301877512258234}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: explode radius
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5689,7 +5689,7 @@ GameObject:
   - component: {fileID: 2666501698227990981}
   - component: {fileID: 2776241573732098122}
   - component: {fileID: 2584706638425239961}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Cylinder
   m_TagString: Untagged
   m_Icon: {fileID: 0}

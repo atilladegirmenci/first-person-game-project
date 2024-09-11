@@ -10,8 +10,12 @@ public class Switch_gun : MonoBehaviour
 
     private int nrWeapons;
 
+    static public Switch_gun instance;
+
     void Start()
     {
+        instance = this;
+
         nrWeapons = weapons.Length;
 
         SwitchWeapon(currentWeapon); // Set default gun

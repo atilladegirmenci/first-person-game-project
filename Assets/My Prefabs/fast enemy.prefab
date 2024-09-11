@@ -42,7 +42,7 @@ GameObject:
   - component: {fileID: 428075185999187355}
   - component: {fileID: 8290888187999034195}
   - component: {fileID: 6798263953001824423}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: damage radius
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -168,7 +168,6 @@ MonoBehaviour:
   moveCooldown: 1.2
   radius: 6
   bodyPivot: {fileID: 71886731440274487}
-  healthbar: {fileID: 7062505522967366255}
 --- !u!82 &5887985177855707742
 AudioSource:
   m_ObjectHideFlags: 0
@@ -287,7 +286,7 @@ GameObject:
   - component: {fileID: 1889319198967892732}
   - component: {fileID: 1889319198967892735}
   - component: {fileID: 5546962666216624086}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: body
   m_TagString: enemy body
   m_Icon: {fileID: 0}
@@ -424,7 +423,7 @@ TrailRenderer:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 0.7421875
+        value: 0.62714386
         inSlope: 0
         outSlope: 0
         tangentMode: 0
@@ -432,7 +431,7 @@ TrailRenderer:
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
-        time: 1
+        time: 0.7888489
         value: 0
         inSlope: 0
         outSlope: 0
@@ -493,7 +492,7 @@ GameObject:
   - component: {fileID: 1889319199252329087}
   - component: {fileID: 1889319199252329086}
   - component: {fileID: 1889319199252329081}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: head
   m_TagString: enemy head
   m_Icon: {fileID: 0}

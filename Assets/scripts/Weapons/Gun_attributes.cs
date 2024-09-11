@@ -16,6 +16,7 @@ public class Gun_attributes : MonoBehaviour
     public float pushBackForce;
     public int magSize;
     protected int bulletInMag;
+    public int reserveBullet;
     public GameObject bullet;
     public GameObject bulletSpwnPivot;
     public GameObject muzzle;

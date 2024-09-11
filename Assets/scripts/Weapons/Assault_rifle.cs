@@ -11,6 +11,7 @@ public class Assault_rifle : Gun_attributes,IGun_interface
 
     private void Awake()
     {
+        instance = this;
         gunMovement = Object.FindObjectOfType<Gun_movement>();
     }
     private void OnEnable()
@@ -21,8 +22,7 @@ public class Assault_rifle : Gun_attributes,IGun_interface
     }
     void Start()
     {
-        instance = this;
-        canShoot = true;
+        
         bulletInMag = magSize;
     }
    
@@ -33,7 +33,7 @@ public class Assault_rifle : Gun_attributes,IGun_interface
         if (Input.GetMouseButton(0)) { Shoot(); }
         if (Input.GetKeyDown(KeyCode.R)) { ReloadCheck(); }
 
-        UIManager.instance.BulletCountText(isReloading, bulletInMag, magSize);
+        UIManager.instance.BulletCountText(isReloading, bulletInMag, reserveBullet);
     }
    
 
@@ -94,14 +94,26 @@ public class Assault_rifle : Gun_attributes,IGun_interface
     {
         sound_manager.instance.PlayARLoad();
         yield return new WaitForSeconds(reloadTime);
-        bulletInMag = magSize;
+
+        int ammoNeeded = magSize - bulletInMag;
+        if (reserveBullet >= ammoNeeded)
+        {
+            bulletInMag += ammoNeeded;
+            reserveBullet -= ammoNeeded;
+        }
+        else
+        {
+            bulletInMag += reserveBullet;
+            reserveBullet = 0;
+        }
+
         canShoot = true;
         isReloading = false;
     }
     public void ReloadCheck()
     {
        
-        if (bulletInMag != magSize) { Reload(); }
+        if (bulletInMag != magSize && reserveBullet > 0 ) { Reload(); }
     }
 
    
@@ -110,6 +122,10 @@ public class Assault_rifle : Gun_attributes,IGun_interface
         yield return new WaitForSeconds(1 / rateOfFire);
         canShoot = true;
     }
-
    
+
+    public void UpdateBullet(int bulletAmount)
+    {
+        reserveBullet += bulletAmount;
+    }
 }

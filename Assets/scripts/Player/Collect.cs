@@ -6,11 +6,11 @@ public class Collect : MonoBehaviour
 {
     private void OnTriggerEnter(UnityEngine.Collider other)
     {
-        ICollectable collectable = other.gameObject.GetComponent<ICollectable>();
-        if(collectable != null)
+        if(other.TryGetComponent<CollectableBase>(out CollectableBase collectBase))
         {
-            collectable.Collect();
+            collectBase.Collected();
         }
+        
         
     }
 }

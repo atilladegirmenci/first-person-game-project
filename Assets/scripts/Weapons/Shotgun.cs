@@ -14,6 +14,7 @@ public class Shotgun : Gun_attributes, IGun_interface
 
     private void Awake()
     {
+        instance = this;
         gunMovement = Object.FindObjectOfType<Gun_movement>();
     }
 
@@ -25,8 +26,6 @@ public class Shotgun : Gun_attributes, IGun_interface
     }
     void Start()
     {
-        instance = this;
-       
         bulletInMag = magSize;
     }
 
@@ -37,7 +36,7 @@ public class Shotgun : Gun_attributes, IGun_interface
         if (Input.GetMouseButtonDown(0)) { Shoot(); }
         if (Input.GetKeyDown(KeyCode.R)) { ReloadCheck(); }
 
-        UIManager.instance.BulletCountText(isReloading,bulletInMag,magSize);
+        UIManager.instance.BulletCountText(isReloading,bulletInMag,reserveBullet);
     }
 
     public void ADS()
@@ -54,16 +53,37 @@ public class Shotgun : Gun_attributes, IGun_interface
 
     public IEnumerator onReload()
     {
-        for(int i = bulletInMag +1; i <= magSize;i++)
+        int ammoNeeded = magSize - bulletInMag;
+        if (reserveBullet >= ammoNeeded)
         {
-      
-           yield return new WaitForSeconds(reloadTime);
+            for (int i = bulletInMag + 1; i <= magSize; i++)
+            {
 
-           sound_manager.instance.PlayShotgunShellLoad();
+                yield return new WaitForSeconds(reloadTime);
 
-           bulletInMag = i;
-            
+                sound_manager.instance.PlayShotgunShellLoad();
+
+                bulletInMag = i;
+                reserveBullet -= 1;
+
+            }
         }
+        else
+        {
+            int n = bulletInMag + reserveBullet;
+            for (int i = bulletInMag +1; i <= n; i++)
+            {
+                yield return new WaitForSeconds(reloadTime);
+
+                sound_manager.instance.PlayShotgunShellLoad();
+
+                bulletInMag = i;
+                reserveBullet -= 1;
+            }
+                
+        }
+
+       
 
         StartCoroutine(sound_manager.instance.PlayShotgunClick(0.4f));
         canShoot = true;
@@ -119,5 +139,10 @@ public class Shotgun : Gun_attributes, IGun_interface
     {
         yield return new WaitForSeconds(1 / rateOfFire);
         canShoot = true;
+    }
+
+    public void UpdateBullet(int bulletAmount)
+    {
+        reserveBullet += bulletAmount;
     }
 }

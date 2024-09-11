@@ -13,9 +13,10 @@ public class sound_manager : MonoBehaviour
     [SerializeField] private AudioSource ARLoad;
     [SerializeField] private AudioSource PistolLoad;
     [SerializeField] private AudioSource bite;
+    [SerializeField] private AudioSource ammoCollect;
 
     static public sound_manager instance;
-    void Start()
+    void Awake()
     {
         instance = this;
         
@@ -28,6 +29,10 @@ public class sound_manager : MonoBehaviour
         {
             Cursor.visible = true;
         }
+    }
+    public void PlayAmmoCollectSound()
+    {
+        ammoCollect.Play();
     }
     public void PlayPistolSound()
     {

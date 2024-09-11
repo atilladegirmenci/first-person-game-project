@@ -74,6 +74,7 @@ public class Explosive_enemy : EnemyAttributes , IEnemy
         isAlive = false;
         attackSound.Stop();
         canvas.gameObject.SetActive(false);
+        CollectableSpawner.Instance.SpawnCollectableOnDie(transform.position);
 
         Destroy(gameObject,5);
 
@@ -88,9 +89,10 @@ public class Explosive_enemy : EnemyAttributes , IEnemy
             if(isAlive)
             {
                 UIManager.instance.UpdateScore();
+                Die();
             }
             
-            Die();
+            
         }
     }
 
@@ -99,9 +101,9 @@ public class Explosive_enemy : EnemyAttributes , IEnemy
         if (isAlive)
         {
             UIManager.instance.UpdateScore();
+            Explode();
         }
 
-        Explode();
     }
 
    
